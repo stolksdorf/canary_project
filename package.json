@@ -1,0 +1,32 @@
+{
+  "name": "canary_project",
+  "version": "0.0.0",
+  "description": "A dummy project for testing out deployment platforms",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch server --watch config server/server.js --dev",
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stolksdorf/canary_project.git"
+  },
+  "keywords": [],
+  "author": "stolksdorf <scott.tolksdorf@gmail.com> (https://stolksdorf.dev/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stolksdorf/canary_project/issues"
+  },
+  "homepage": "https://github.com/stolksdorf/canary_project#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "pg": "^8.6.0",
+    "pico-conf": "^3.0.3",
+    "pico-pg": "^1.0.0"
+  },
+  "devDependencies": {
+    "livereload": "^0.9.3"
+  }
+}
