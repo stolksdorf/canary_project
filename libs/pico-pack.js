@@ -40,8 +40,8 @@ const picopack = (entryFilePath, modules={}, opts={})=>{
 		}
 		let mod = {
 			id, filepath,
-			fn       : replaceAll(path.relative(process.cwd(), filepath), '\\', '/'),
-			root     : replaceAll(path.relative(path.dirname(filepath), process.cwd()), '\\', '/'),
+			fn       : replaceAll(path.relative(process.cwd(), filepath), '\\\\', '/'),
+			root     : replaceAll(path.relative(path.dirname(filepath), process.cwd()), '\\\\', '/'),
 			deps     : {},
 			upstream : new Set([requiringId]),
 			code     : getCode(filepath)
