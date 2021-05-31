@@ -7,8 +7,8 @@ server.use(require('body-parser').json());
 server.use(express.static(`${process.cwd()}/build`));
 server.use(express.static(`${process.cwd()}/assets`));
 
-//const Logs = require('./logs.mem.js');
-const Logs = require('./logs.db.js');
+const Logs = require('./logs.mem.js');
+//const Logs = require('./logs.db.js');
 
 server.get('/ping', (req, res)=> res.json({ pong : true, ts : Date.now() }));
 

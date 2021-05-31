@@ -1,4 +1,6 @@
 module.exports = {
 	PORT : 8000,
-	auth : {}
+	auth : {
+		scott : 'test'
+	}
 }
