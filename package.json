@@ -2,7 +2,7 @@
   "name": "canary_project",
   "version": "0.0.0",
   "description": "A dummy project for testing out deployment platforms",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon --watch server --watch config server/server.js --dev",
     "start": "node app.js",

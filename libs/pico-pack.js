@@ -4,6 +4,15 @@ const path = require('path');
 
 const hash = (str)=>[...str].reduce((acc, char)=>{acc = ((acc<<5)-acc)+char.charCodeAt(0);return acc&acc; }, 0).toString(32);
 
+if(!String.prototype.replaceAll){
+	String.prototype.replaceAll = function(str, newStr){
+		if (Object.prototype.toString.call(str).toLowerCase() === '[object regexp]') {
+			return this.replace(str, newStr);
+		}
+		return this.replace(new RegExp(str, 'g'), newStr);
+	};
+}
+
 const baseTransforms = {
 	'.json' : (code, filename)=>`module.exports=${code};`,
 	'.js'   : (code, filename)=>code,
