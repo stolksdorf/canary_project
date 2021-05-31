@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch server --watch config server/server.js --dev",
-    "start": "node server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "bundle": "git archive -v -o deploy.zip --format=zip HEAD"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stolksdorf/canary_project/issues"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "homepage": "https://github.com/stolksdorf/canary_project#readme",
   "dependencies": {

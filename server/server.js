@@ -21,12 +21,10 @@ server.use(require('./page.router.js'));
 
 
 const PORT = config.get('port');
-Logs.connect()
-	.then(()=>{
-		server.listen(PORT, ()=>{
-			console.log(`Server running at PORT: ${PORT}`);
-		});
-	})
-	.catch(err=>{
-		console.error(err)
-	})
+
+module.exports = async ()=>{
+	await Logs.connect();
+	server.listen(PORT, ()=>{
+		console.log(`Server running at PORT: ${PORT}`);
+	});
+}
