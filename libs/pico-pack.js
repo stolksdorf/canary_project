@@ -4,13 +4,8 @@ const path = require('path');
 
 const hash = (str)=>[...str].reduce((acc, char)=>{acc = ((acc<<5)-acc)+char.charCodeAt(0);return acc&acc; }, 0).toString(32);
 
-if(!String.prototype.replaceAll){
-	String.prototype.replaceAll = function(str, newStr){
-		if (Object.prototype.toString.call(str).toLowerCase() === '[object regexp]') {
-			return this.replace(str, newStr);
-		}
-		return this.replace(new RegExp(str, 'g'), newStr);
-	};
+const replaceAll = (str, target, replacement)=>{
+	return str.replace(new RegExp(target, 'g'), replacement)
 }
 
 const baseTransforms = {
@@ -45,8 +40,8 @@ const picopack = (entryFilePath, modules={}, opts={})=>{
 		}
 		let mod = {
 			id, filepath,
-			fn       : path.relative(process.cwd(), filepath).replaceAll('\\', '/'),
-			root     : path.relative(path.dirname(filepath), process.cwd()).replaceAll('\\', '/'),
+			fn       : replaceAll(path.relative(process.cwd(), filepath), '\\', '/'),
+			root     : replaceAll(path.relative(path.dirname(filepath), process.cwd()), '\\', '/'),
 			deps     : {},
 			upstream : new Set([requiringId]),
 			code     : getCode(filepath)
