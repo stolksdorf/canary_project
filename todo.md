@@ -7,17 +7,18 @@
 - Easy access to logs
 - Rollbacks
 - Easily change environment variables
-- DNS changes
+- Custom Domain name
 - Database integration
 
 
+
 ## Tier 1 Goals
-- Pipelines
-- multi environment
--
+- Pipelines + Promotions
+- Multi environment
 
+
+
+## Tier 2 Goals
 - add analytics
-
-
 - Add Okta accounts
 	- Look into this

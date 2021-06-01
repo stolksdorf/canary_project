@@ -12,7 +12,7 @@ const connect = async ()=>{
 			connectionString,
 			ssl: {
 				rejectUnauthorized: false
-			}
+		}
 		});
 	}else{
 		await ppg.connect(config.get('db'));
