@@ -32,7 +32,7 @@ module.exports = {
 				'*' : AssetTransform
 			},
 			watch : DEV_MODE ? (res, fp)=>{
-				console.log(`Re-bundling: ${pathToFile}`);
+				console.log(`${fp} changed`, `Re-bundling: ${pathToFile}`);
 				func(res);
 				lr.refresh(fp);
 			} : false

@@ -1,5 +1,8 @@
 const {css, x, comp, colors, cx} = require('../core.js');
 
+const mp = require('../analytics.js');
+
+
 global.headtags.title = `<title>Canary Main Page</title>`;
 
 global.css.admin = css`
@@ -80,8 +83,6 @@ const Main = comp(function(){
 
 			${User('brad')}
 			${User('scott')}
-
-			Let's GOOOO
 
 
 			${error && x`<div class='error'>

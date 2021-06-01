@@ -4,10 +4,9 @@
   "description": "A dummy project for testing out deployment platforms",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon --watch server --watch config server/server.js --dev",
+    "dev": "nodemon --watch server --watch config app.js --dev",
     "start": "node app.js",
-    "bundle": "git archive -v -o deploy.zip --format=zip HEAD",
-    "logs": "heroku logs -t --app=canary-foobar"
+    "logs": "heroku logs -t --app=canary2"
   },
   "repository": {
     "type": "git",
