@@ -8,7 +8,12 @@ const connectionString = config.get('DATABASE_URL', false);
 const connect = async ()=>{
 
 	if(connectionString){
-		await ppg.connect({ connectionString });
+		await ppg.connect({
+			connectionString,
+			ssl: {
+				rejectUnauthorized: false
+			}
+		});
 	}else{
 		await ppg.connect(config.get('db'));
 	}
