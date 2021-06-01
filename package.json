@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --watch server --watch config server/server.js --dev",
     "start": "node app.js",
-    "bundle": "git archive -v -o deploy.zip --format=zip HEAD"
+    "bundle": "git archive -v -o deploy.zip --format=zip HEAD",
+    "logs": "heroku logs -t --app=canary-foobar"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
     "url": "https://github.com/stolksdorf/canary_project/issues"
   },
   "engines": {
-    "node": "16.x"
+    "node": "14.x"
   },
   "homepage": "https://github.com/stolksdorf/canary_project#readme",
   "dependencies": {
