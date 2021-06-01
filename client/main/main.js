@@ -81,7 +81,7 @@ const Main = comp(function(){
 			${User('brad')}
 			${User('scott')}
 
-			YOOOO
+			Let's GOOOO
 
 
 			${error && x`<div class='error'>
