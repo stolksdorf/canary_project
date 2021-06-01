@@ -3,8 +3,16 @@ const config = require('../config')
 
 let DB;
 
+const connectionString = config.get('DATABASE_URL', false);
+
 const connect = async ()=>{
-	await ppg.connect(config.get('db'));
+
+	if(connectionString){
+		await ppg.connect({ connectionString });
+	}else{
+		await ppg.connect(config.get('db'));
+	}
+
 	DB = await ppg.table('logs');
 }
 

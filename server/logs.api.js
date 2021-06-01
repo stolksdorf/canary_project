@@ -3,8 +3,8 @@ const Router = express.Router()
 
 const mw = require('./middleware.js');
 
-const LogDB = require('./logs.mem.js');
-//const LogDB = require('./logs.db.js');
+//const LogDB = require('./logs.mem.js');
+const LogDB = require('./logs.db.js');
 
 
 const wait = async (n,val)=>new Promise((r)=>setTimeout(()=>r(val), n));

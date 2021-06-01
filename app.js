@@ -1,7 +1,7 @@
 const config = require('./config');
 
-const Logs = require('./server/logs.mem.js');
-//const Logs = require('./server/logs.db.js');
+//const Logs = require('./server/logs.mem.js');
+const Logs = require('./server/logs.db.js');
 
 const server = require('./server/server.js');
 
