@@ -39,6 +39,8 @@ const Main = comp(function(){
 	
 	this.useEffect(()=>{
 		fetchLogs();
+
+		anayltics.min3();
 	}, []);
 
 	this.useEffect(()=>{

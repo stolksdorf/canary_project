@@ -21,6 +21,11 @@ const mp = {
 		mp.track('counter_clicked', {
 			user
 		});
+	},
+	min3: ()=>{
+		setTimeout(()=>{
+			mp.track('3_minutes_on_page')
+		}, 3 * 60 * 1000)
 	}
 }
 

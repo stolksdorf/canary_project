@@ -1,6 +1,6 @@
 const {css, x, comp, colors, cx} = require('../core.js');
 
-const mp = require('../analytics.js');
+const analytics = require('../analytics.js');
 
 
 global.css.user = css`
@@ -18,7 +18,7 @@ const User = comp(function(name){
 	const [counter, setCounter] = this.useState(0);
 
 	const handleClick = ()=>{
-		mp.clickCounter(name);
+		analytics.clickCounter(name);
 		setCounter(counter + 1);
 	};
 
