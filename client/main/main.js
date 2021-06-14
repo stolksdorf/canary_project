@@ -18,6 +18,9 @@ global.css.admin = css`
 	}
 `;
 
+
+
+
 const { request } = require('../utils.js');
 
 const User = require('./user.js');
@@ -29,6 +32,8 @@ const Main = comp(function(){
 
 	const [isHovered, setIsHovered] = this.useState(false);
 
+	
+	
 	this.useEffect(()=>{
 		fetchLogs();
 	}, []);
