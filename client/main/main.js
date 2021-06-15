@@ -13,6 +13,10 @@ global.css.admin = css`
 			color : ${colors.blue};
 		}
 
+		a{
+			color : ${colors.orange};
+		}
+
 		.error{
 			border: 1px solid ${colors.red};
 			color: ${colors.red};
@@ -28,7 +32,10 @@ const { request } = require('../utils.js');
 
 const User = require('./user.js');
 
-const Main = comp(function(){
+const Main = comp(function(args){
+	console.log('args root', args)
+
+
 	const [logs, setLogs]       = this.useState([]);
 	const [pending, setPending] = this.useState(false);
 	const [error, setError]     = this.useState(null);
@@ -40,7 +47,7 @@ const Main = comp(function(){
 	this.useEffect(()=>{
 		fetchLogs();
 
-		anayltics.min3();
+		mp.min3();
 	}, []);
 
 	this.useEffect(()=>{
@@ -72,6 +79,19 @@ const Main = comp(function(){
 				onmouseenter=${()=>setIsHovered(true)}
 				onmouseleave=${()=>setIsHovered(false)}
 			>Main Page</h1>
+
+			${
+				args.user
+				? x`<div>
+					Welcome ${args.user.given_name}!
+					<a href='/logout'>logout</a>
+
+					${args.user.groups.join(', ')}
+				</div>`
+				: x`<div>
+					<a href='/login'>login</a>
+				</div>`
+			}
 
 			<button onclick=${()=>fetchLogs()}>Fetch Logs</button>
 			${pending && x`<i class='fa fa-spinner fa-spin'></i>`}

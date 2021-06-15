@@ -11,7 +11,6 @@ if(DEV_MODE){
 	console.log('⚙ DEV MODE ACTIVE ⚙');
 }
 
-
 const AssetTransform = (code, fp, global)=>{
 	const staticDirectory = 'assets';
 	const _path = path.relative(process.cwd(), fp).replaceAll('\\', '/');
@@ -32,7 +31,9 @@ module.exports = {
 				'*' : AssetTransform
 			},
 			watch : DEV_MODE ? (res, fp)=>{
-				console.log(`${fp} changed`, `Re-bundling: ${pathToFile}`);
+				if(fp){
+					console.log(`${fp} changed`, `Re-bundling: ${pathToFile}`);
+				}
 				func(res);
 				lr.refresh(fp);
 			} : false

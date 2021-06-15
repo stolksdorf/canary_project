@@ -31,6 +31,6 @@ module.exports = (...args)=>{
 	</head>
 	<body>${render(MainBundle.export(...args))}</body>
 	<script>${MainBundle.bundle}</script>
-	<script>xo.render(document.body.children[0], window.main())</script>
+	<script>xo.render(document.body.children[0], window.main(...${JSON.stringify(args)}))</script>
 	</html>`;
 };
