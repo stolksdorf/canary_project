@@ -22,6 +22,7 @@ global.css.core = css`
 		margin    : 0;
 		padding   : 0;
 		position  : relative;
+
 	}
 	*, * : before, *:after {
 		box-sizing : border-box;
@@ -41,6 +42,28 @@ global.css.core = css`
 		width     : calc(100% - 60px);
 		max-width : 85rem;
 		margin    : 0 auto;
+	}
+
+	button{
+		background-color: transparent;
+		border: 1px solid ${colors.blue};
+		color : ${colors.white};
+		border-radius : 5px;
+
+		font-family: monospace;
+		padding : 0.5em 1em;
+		cursor : pointer;
+		transition: background-color 0.25s;
+		&:hover{
+			background-color: ${fade(colors.blue)};
+		}
+		&:disabled{
+			cursor : not-allowed;
+			color : ${lighten(colors.grey, 0.2)};
+			background-color: ${colors.grey};
+			//background-image: repeating-linear-gradient(45deg, #ccc, #ccc 20px, #dbdbdb 5px, #dbdbdb 40px);
+
+		}
 	}
 `;
 

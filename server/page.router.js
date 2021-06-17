@@ -15,6 +15,14 @@ Router.get('/', (req, res)=>{
 	}));
 });
 
+
+Router.get('/profile', (req, res)=>{
+	if(!req.user) return res.status(401).send('Must be logged in to access your profile')
+	return res.send(Pages.profile({
+		user : req.user
+	}));
+});
+
 // Router.get('/admin', auth.adminOnly, (req, res)=>{
 // 	return res.send(AdminPage({
 // 		user : req.user

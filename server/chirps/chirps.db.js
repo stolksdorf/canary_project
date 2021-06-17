@@ -86,6 +86,6 @@ module.exports = {
 }
 
 
-if(!db_config.url && !db_config.port){ //TODO: add on a prod check
-	module.exports = require('./chirps.mem.js');
-}
+// if(!db_config.url && !db_config.port){ //TODO: add on a prod check
+// 	module.exports = require('./chirps.mem.js');
+// }

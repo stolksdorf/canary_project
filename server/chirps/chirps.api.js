@@ -18,6 +18,9 @@ router.get('/api/chirps/user/:user_id', async (req, res)=>{
 });
 
 router.get('/api/chirps/latest', async (req, res)=>{
+
+	await wait(1200);
+
 	return res.json(await ChirpsDB.getLatest(req.query.count));
 });
 

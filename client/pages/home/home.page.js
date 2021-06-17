@@ -8,114 +8,105 @@ global.headtags.title = '<title>Home - Canary Project</title>';
 
 global.css.home_page = css`
 	.Home{
+		.content.container{
+			margin-top : 3em;
+			display : flex;
+			flex-direction: row;
+
+			aside{
+				width : 29%;
+				min-width : 200px;
+				margin-right : 1em;
+			}
+			main{
+				width : 70%;
+			}
+		}
+
+		.welcome_popup{
+			font-size: 0.8em;
+			p{
+				margin-top: 1em;
+			}
+		}
+
+		.ChirpList{
+			button{
+				font-size: 1.3em;
+			}
+		}
 
 	}
 `;
 
 const Nav = require('../../shared/nav.js');
 const Chirp = require('../../shared/chirp.js');
-
 const TipBox = require('../../shared/tipbox.js');
+const NewChirpBox = require('../../shared/newChirp.js');
+
 
 
 const ChirpList = comp(function(){
-	const [chirps, setChirps] = this.useState([]);
+	const fetchChirps = this.useAsync(async (count=this.refs.count)=>{
+		const {data} = await request.get(`/api/chirps/latest?count=${count}`);
+		return data;
+	}, [])
 
-	const fetch = async ()=>{
-		const {data} = await request.get(`/api/chirps/latest?count=${this.refs.count}`)
-		setChirps(data);
-	}
 	const loadMore = ()=>{
-		this.refs.count += 3;
-		fetch();
+		this.refs.count += 5;
+		fetchChirps(this.refs.count);
 	};
 
 	this.useEffect(()=>{
-		this.refs.count = 3;
-		fetch();
-		window.refreshList = fetch;
+		this.refs.count = 5;
+		fetchChirps(this.refs.count);
+		global.refreshChirps = fetchChirps;
 	}, [])
 
-
+	const chirps = fetchChirps.result;
 	return x`<div class='ChirpList'>
 		${chirps.map(Chirp)}
-		<button onclick=${()=>loadMore()}>Load More</button>
-	</div>`
-});
-
-
-
-
-const Welcome = TipBox('welcome', x`<div>
-	<h2>Welcome!</h2>
-	<p> This is a canary project </p>
-</div>`)
-
-
-
-
-global.css.new_chirp_box = css`
-	.NewChirpBox{
-
-		.errors{
-			color : ${colors.red};
-		}
-
-	}
-`
-
-
-const NewChirpBox = comp(function(){
-	const [pending, setPending] = this.useState(false);
-	const [errors, setErrors] = this.useState(null);
-	const [content, setContent] = this.useState('');
-
-	const submit = async ()=>{
-		setPending(true);
-		setErrors(null);
-		request.post('/api/chirps/create', {
-			text : content
-		}).then((res)=>{
-			setContent('');
-			if(typeof window.refreshList == 'function') window.refreshList();
-		})
-		.catch(({data})=>{
-			setErrors(data);
-		})
-		.finally(()=>{
-			setPending(false);
-		})
-	};
-
-	const handleInput = (evt)=>{
-		setContent(evt.target.value)
-	}
-
-	const ready = content !== '' && !pending;
-
-	return x`<div class='NewChirpBox'>
-		<textarea value=${content} oninput=${handleInput}></textarea>
-		${errors && x`<div class='errors'>${errors}</div>`}
-		<button onclick=${submit} oninput=${handleInput} disabled=${!ready}>
-			${pending
+		<button onclick=${()=>loadMore()}>
+			${fetchChirps.pending
 				? x`<i class='fa fa-spinner fa-spin'></i>`
-				: 'Chirp!'
+				: 'Load More'
 			}
 		</button>
 	</div>`
 });
 
 
+
+
+const Welcome = TipBox('welcome', x`<div class='welcome_popup'>
+	<h2>Welcome!</h2>
+	<p>
+		This is a canary project. It's a demo project showcasing many features of web apps
+	</p>
+	<p>
+		Here we have created a pseudo-twitter clone where user's can 'chirp' out updates. There's a profile page to remove your own chirps, as well as an admin page to manage all 'chirps'
+	</p>
+	<p>
+		It's using Okta for accounts, Postgres for a database, and hosted on Heroku.
+	</p>
+</div>`)
+
+
+
+
 const Home = comp(function({ user }){
 	return x`<div class='Home'>
 		${Nav(user)}
-		<main>
-			${Welcome}
-			Home Page!
-			${ChirpList()}
-
-			${!!user && NewChirpBox()}
-		</main>
+		<div class='content container'>
+			<aside>
+				${Welcome}
+				${!!user && NewChirpBox(global.refreshChirps)}
+			</aside>
+			<main>
+				<h1>Latest Chirps</h1>
+				${ChirpList()}
+			</main>
+		</div>
 	</div>`
 });
 
