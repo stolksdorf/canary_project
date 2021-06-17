@@ -60,7 +60,7 @@ const ChirpList = comp(function(){
 	this.useEffect(()=>{
 		this.refs.count = 5;
 		fetchChirps(this.refs.count);
-		window.refreshList = fetchChirps;
+		global.refreshChirps = fetchChirps;
 	}, [])
 
 	const chirps = fetchChirps.result;
@@ -100,7 +100,7 @@ const Home = comp(function({ user }){
 		<div class='content container'>
 			<aside>
 				${Welcome}
-				${!!user && NewChirpBox()}
+				${!!user && NewChirpBox(global.refreshChirps)}
 			</aside>
 			<main>
 				<h1>Latest Chirps</h1>

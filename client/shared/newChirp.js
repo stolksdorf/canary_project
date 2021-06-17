@@ -1,5 +1,7 @@
 const {css, x, comp, colors, cx, fade} = require('../core.js');
 
+const { request } = require('../utils.js');
+
 
 global.css.new_chirp_box = css`
 	.NewChirpBox{
@@ -23,13 +25,14 @@ global.css.new_chirp_box = css`
 	}
 `;
 
-const NewChirpBox = comp(function(){
+const NewChirpBox = comp(function(onCreate=()=>{}){
 	const [content, setContent] = this.useState('');
 	const createChirp = this.useAsync(async (text)=>{
 		return request.post('/api/chirps/create', { text })
 			.then(()=>{
 				setContent('');
-				if(typeof window.refreshList == 'function') window.refreshList();
+				onCreate();
+				if(typeof window.refreshChirps == 'function') window.refreshChirps();
 			})
 	});
 
@@ -48,7 +51,7 @@ const NewChirpBox = comp(function(){
 
 		<textarea value=${content} oninput=${handleInput}></textarea>
 
-		${createChirp.errors && x`<div class='errors'>${createChirp.errors.data}</div>`}
+		${createChirp.errors && x`<div class='errors'>${createChirp.errors.data || createChirp.errors}</div>`}
 
 		<button onclick=${submit} oninput=${handleInput} disabled=${!ready}>
 			${createChirp.pending

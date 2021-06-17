@@ -65,13 +65,14 @@ const Stats = comp(function(chirps){
 
 
 const ProfilePage = comp(function({ user }){
-	const userChirps = this.useAsync(async ()=>{
+	const getUserChirps = this.useAsync(async ()=>{
 		const {data} = await request.get(`/api/chirps/user/${user.sub}`);
 		return data;
 	}, [])
 
 	this.useEffect(()=>{
-		userChirps();
+		getUserChirps();
+		window.refreshChirps = getUserChirps
 	}, [])
 
 
@@ -87,14 +88,14 @@ const ProfilePage = comp(function({ user }){
 				<h1>${user.name}'s Profile</h1>
 				<h3>
 					Your Chirps
-					<button onclick=${userChirps}>
-						${userChirps.pending
+					<button onclick=${getUserChirps}>
+						${getUserChirps.pending
 							? x`<i class='fa fa-spinner fa-spin'></i>`
 							: x`<i class='fa fa-refresh'></i>`
 						}
 					</button>
 				</h3>
-				${userChirps.result.map(Chirp)}
+				${getUserChirps.result.map(Chirp)}
 			</main>
 		</div>
 	</div>`
