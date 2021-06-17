@@ -3,12 +3,20 @@ module.exports = {
 	host : 'http://localhost:8000',
 
 
-	auth : {
-		scott : 'test'
-	},
 	client : {
 
 	},
+
+
+	DATABASE_URL : false,
+	// local_db : {
+	// 	user     : '',
+	// 	password : '',
+	// 	port     : 0,
+	// },
+
+
+	//TODO: Populate this with a defualt Okta instances when we have one
 	okta : {
 		session_secret: 'set this to be very random',
 		domain        : '',

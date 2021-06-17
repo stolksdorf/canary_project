@@ -1,5 +1,3 @@
-//https://github.com/okta/samples-nodejs-express-4
-
 const config = require('../config');
 const express = require('express');
 const server = express();
@@ -41,8 +39,6 @@ server.get(config.get('okta.logout_path'), (req, res, next)=>{
 }, oidc.forceLogoutAndRevoke());
 
 
-
-
 /* Middleware */
 const mw = {};
 mw.ensureGroups = (...groups)=>{
@@ -58,7 +54,6 @@ mw.adminOnly = mw.ensureGroups('admin');
 mw.ensureUser = oidc.ensureAuthenticated();
 
 
-
 const router = new Promise((resolve, reject)=>{
 	oidc.on('ready', ()=>resolve(server));
 	oidc.on('error', (err)=>reject(err));
@@ -67,4 +62,4 @@ const router = new Promise((resolve, reject)=>{
 module.exports = {
 	router : async ()=>router,
 	mw,
-}
+};

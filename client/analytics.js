@@ -1,13 +1,17 @@
 let ready = true;
 
 if(typeof window == 'undefined' || !window.mixpanel){
-	//console.log('Mixpanel not configured properly.')
+	console.log('Mixpanel not configured properly.')
 	ready = false;
 }
 
-
-
 const mp = {
+	snippet : `
+
+
+	`,
+
+
 	track : (event, data)=>{
 		if(!ready) return;
 		console.log('sending event', event)

@@ -1,5 +1,27 @@
 # TODO
 
+## Tuesday, 15/06/2021
+
+- Profile Page
+	- Delete Chirp with confirmation
+	- Profile tip box
+	- New Chirp box
+
+- Admin Page
+	- All Chirps
+	- actions to clear
+	- Can delete all chirps
+	-
+
+
+- Make the chirp box cute with an emoji
+- write pout the swagger spec for the API
+	- Mebbe make a root api
+- Tests
+	- Set up a basic mock server test
+	- Set up basic database tests
+-
+
 
 
 ## Tier 0 Goals

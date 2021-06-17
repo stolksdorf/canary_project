@@ -4,6 +4,20 @@ A dummy project for testing out deployment platforms
 
 
 
+### Scripts
+
+- `npm run start` : Starts a development server
+- `npm run dev` : Starts a development server
+- `npm run tests`
+- `npm run tests:dev`
+
+- `npm run dummy_data` : Preloads the data base with some random fake data
+
+- `npm run logs`
+- `npm run heroku`
+
+
+
 
 
 ## Okta Config
