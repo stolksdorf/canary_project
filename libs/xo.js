@@ -135,6 +135,23 @@ const runComponent = (comp, node)=>{
 			}
 		}];
 	};
+	node.useAsync = (func, init)=>{
+		const [pending, setPending] = node.useState(false);
+		const [errors, setErrors] = node.useState(null);
+		const [result, setResult] = node.useState(init);
+		let res = (...args)=>{
+			setPending(true);
+			setErrors(null);
+			return func(...args)
+				.then((content)=>setResult(content))
+				.catch((err)=>setErrors(err))
+				.finally(()=>setPending(false))
+		}
+		res.pending=pending;
+		res.errors=errors;
+		res.result=result;
+		return res;
+	};
 	node.useEffect=(func, args)=>{
 		let idx = effectCounter++;
 		if(!node.effects[idx]) node.effects[idx] = {};
@@ -285,6 +302,7 @@ if(isServerSide){
 		return func.bind({
 			useState : (init)=>{return [init,()=>{}]},
 			useEffect :(func)=>null,
+			useAsync :(func, init)=>{func.result=init; return func;},
 			refs : {}
 		})
 	}
