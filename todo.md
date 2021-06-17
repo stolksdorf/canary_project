@@ -1,5 +1,12 @@
 # TODO
 
+## Wednesday, 16/06/2021
+
+- Move mixpanel snippet into analytics.js
+- Add in auth tests
+- Create a dummy auth file for no Okta
+
+
 ## Tuesday, 15/06/2021
 
 - Profile Page

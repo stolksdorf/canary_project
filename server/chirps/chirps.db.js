@@ -1,7 +1,14 @@
 const config = require('../../config');
 const ppg = require('pico-pg');
-
 let DB;
+
+const db_config = config.get('db');
+
+
+
+
+
+//TODO: This needs to be cleaned up
 
 const dbConnect = async ()=>{
 	if(ppg.isConnected()) return;
@@ -70,11 +77,15 @@ const getByUser = async (user_id)=>{
 module.exports = {
 	connect, disconnect,
 
-
 	create,
 
 	getLatest,
 	getByUser,
 
 	all,
+}
+
+
+if(!db_config.url && !db_config.port){ //TODO: add on a prod check
+	module.exports = require('./chirps.mem.js');
 }

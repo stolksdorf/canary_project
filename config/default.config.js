@@ -7,14 +7,15 @@ module.exports = {
 
 	},
 
+	db : {
+		//These should be overriden in your local.config.js file for dev
 
-	DATABASE_URL : false,
-	// local_db : {
-	// 	user     : '',
-	// 	password : '',
-	// 	port     : 0,
-	// },
+		// connectionString : ''
 
+		// user             : '',
+		// password         : '',
+		// port             : 0,
+	},
 
 	//TODO: Populate this with a defualt Okta instances when we have one
 	okta : {
