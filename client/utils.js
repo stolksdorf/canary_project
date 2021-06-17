@@ -1,6 +1,6 @@
 
 const qs = {
-	get : (url)=>Object.fromEntries((url.split('?')[1]||'').split('&').map((c) => c.trim().split('=').map(decodeURIComponent))),
+	get : (url)=>Object.fromEntries((url.split('?')[1]||'').split('&').map((c) => c.trim().split('=').map(decodeURIComponent).reverse())),
 	set : (url, obj)=>url.split('?')[0] + '?' + Object.entries(obj).map(([v,k])=>`${k}=${encodeURIComponent(v)}`).join('&'),
 	add : (url, obj)=>qs.set(url, {...qs.get(url, obj), ...obj}),
 };
@@ -26,6 +26,16 @@ request.del  = request.bind(null, 'DELETE');
 request.put  = request.bind(null, 'PUT');
 
 
+let cookies = {
+	all : ()=>Object.fromEntries(document.cookie.split(';').map((c) => c.trim().split('=').map(decodeURIComponent))),
+	get : (name)=>cookies.all()[name],
+	set : (name, val, opts={})=>document.cookie = `${name}=${val}; ${Object.entries(opts).map(([v,k])=>`${k}=${v}`).join('; ')}`,
+	del : (name)=>document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`,
+};
+if(typeof document === 'undefined'){
+	cookies = {all : ()=>{}, get : ()=>{}, set : ()=>{}, del : ()=>{}}
+}
+
 module.exports = {
-	qs, request
+	qs, request, cookies
 }

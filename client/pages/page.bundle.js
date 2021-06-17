@@ -20,10 +20,9 @@ const AssetTransform = (code, fp, global)=>{
 	return `module.exports='/${_path}';`
 };
 
-//cssTransform ?
-
 
 module.exports = {
+	render,
 	bundle: (pathToFile, func)=>{
 		const result = pack(pathToFile, {
 			global : { css : {}, headtags: {} },
@@ -32,7 +31,7 @@ module.exports = {
 			},
 			watch : DEV_MODE ? (res, fp)=>{
 				if(fp){
-					console.log(`${fp} changed`, `Re-bundling: ${pathToFile}`);
+					console.log(`${path.relative(process.cwd(), fp)} changed`, `Re-bundling: ${pathToFile}`);
 				}
 				func(res);
 				lr.refresh(fp);
@@ -40,7 +39,6 @@ module.exports = {
 		});
 		return func(result);
 	},
-
 	cacheOnce : (func)=>{
 		let lastArgs, lastResult;
 		return (...args)=>{

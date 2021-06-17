@@ -1,5 +1,8 @@
 const {css, x, comp, colors, cx} = require('../core.js');
 
+const mp = require('../analytics.js');
+
+
 global.headtags.title = `<title>Canary Main Page</title>`;
 
 global.css.admin = css`
@@ -8,6 +11,10 @@ global.css.admin = css`
 
 		h1.hover{
 			color : ${colors.blue};
+		}
+
+		a{
+			color : ${colors.orange};
 		}
 
 		.error{
@@ -25,7 +32,10 @@ const { request } = require('../utils.js');
 
 const User = require('./user.js');
 
-const Main = comp(function(){
+const Main = comp(function(args){
+	console.log('args root', args)
+
+
 	const [logs, setLogs]       = this.useState([]);
 	const [pending, setPending] = this.useState(false);
 	const [error, setError]     = this.useState(null);
@@ -36,6 +46,8 @@ const Main = comp(function(){
 	
 	this.useEffect(()=>{
 		fetchLogs();
+
+		mp.min3();
 	}, []);
 
 	this.useEffect(()=>{
@@ -68,6 +80,19 @@ const Main = comp(function(){
 				onmouseleave=${()=>setIsHovered(false)}
 			>Main Page</h1>
 
+			${
+				args.user
+				? x`<div>
+					Welcome ${args.user.given_name}!
+					<a href='/logout'>logout</a>
+
+					${args.user.groups.join(', ')}
+				</div>`
+				: x`<div>
+					<a href='/login'>login</a>
+				</div>`
+			}
+
 			<button onclick=${()=>fetchLogs()}>Fetch Logs</button>
 			${pending && x`<i class='fa fa-spinner fa-spin'></i>`}
 
@@ -85,8 +110,6 @@ const Main = comp(function(){
 
 			${User('brad')}
 			${User('scott')}
-
-			YOOOO
 
 
 			${error && x`<div class='error'>
