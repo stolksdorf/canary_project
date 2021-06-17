@@ -1,7 +1,7 @@
 module.exports = {
 	port : 8000,
 	host : 'http://localhost:8000',
-
+	node_env : 'local',
 
 	client : {
 

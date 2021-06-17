@@ -6,6 +6,11 @@
 - Add in auth tests
 - Create a dummy auth file for no Okta
 
+- Okta signup event / Okta Login event
+-
+
+
+
 
 ## Tuesday, 15/06/2021
 

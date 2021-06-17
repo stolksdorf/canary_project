@@ -19,6 +19,19 @@ A dummy project for testing out deployment platforms
 
 
 
+## Dev Setup
+
+- Auto-reload extension
+- File Watching
+
+
+
+## Tests
+
+
+
+
+
 
 ## Okta Config
 
