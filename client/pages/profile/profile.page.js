@@ -55,27 +55,22 @@ const ProfileTips = TipBox('profile', x`<div class='profile_popup'>
 
 
 const Stats = comp(function(chirps=[]){
-
-
 	let timeSince = 'None';
 	if(chirps[0]){
 		timeSince = formatDistanceToNow(new Date(chirps[0].created_at))
 	}
 
-
 	return x`<div class='Stats'>
 		<h3>Your Stats</h3>
-
 		<div class='field'>
 			<label>Total Chirps:</label>
 			<span>${chirps.length}</span>
 		</div>
-
 		<div class='field'>
 			<label>Time Since last Chirp:</label>
 			<span>${timeSince}</span>
 		</div>
-	</div>`
+	</div>`;
 });
 
 
@@ -85,15 +80,14 @@ const ProfilePage = comp(function({ user }){
 	const getUserChirps = this.useAsync(async ()=>{
 		const {data} = await request.get(`/api/chirps/user/${user.sub}`);
 		return data;
-	}, [])
+	}, []);
 
 	this.useEffect(()=>{
 		getUserChirps();
 		window.refreshChirps = getUserChirps
-	}, [])
+	}, []);
 
-
-	return x`<div class='Profile'>
+	return x`<div class='Profile page'>
 		${Nav(user)}
 		<div class='content container'>
 			<aside>
@@ -120,7 +114,6 @@ const ProfilePage = comp(function({ user }){
 								getUserChirps();
 							})
 					}
-
 					return Chirp(chirp, triggerDelete)
 				})}
 			</main>

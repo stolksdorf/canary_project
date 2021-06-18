@@ -61,9 +61,10 @@ global.css.core = css`
 			cursor : not-allowed;
 			color : ${lighten(colors.grey, 0.2)};
 			background-color: ${colors.grey};
-			//background-image: repeating-linear-gradient(45deg, #ccc, #ccc 20px, #dbdbdb 5px, #dbdbdb 40px);
-
 		}
+	}
+	input{
+		background-color:${colors.grey};
 	}
 `;
 

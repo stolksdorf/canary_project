@@ -22,6 +22,10 @@ router.get('/api/chirps/latest', async (req, res)=>{
 	return res.json(await ChirpsDB.getLatest(req.query.count));
 });
 
+router.get('/api/chirps/all', async (req, res)=>{
+	return res.json(await ChirpsDB.all());
+});
+
 
 router.all('/api/chirps/delete/:chirp_id', async (req, res)=>{
 	const result = await ChirpsDB.deleteChirp(req.params.chirp_id);
