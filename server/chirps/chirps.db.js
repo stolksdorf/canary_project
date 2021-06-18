@@ -70,9 +70,11 @@ const getByUser = async (user_id)=>{
 			created_at : -1
 		}
 	});
-}
+};
 
-
+const deleteChirp = async (chirp_id)=>{
+	return DB.removeById(chirp_id);
+};
 
 module.exports = {
 	connect, disconnect,
@@ -81,6 +83,7 @@ module.exports = {
 
 	getLatest,
 	getByUser,
+	deleteChirp,
 
 	all,
 }
