@@ -95,6 +95,11 @@ const Welcome = TipBox('welcome', x`<div class='welcome_popup'>
 
 
 const Home = comp(function({ user }){
+	this.useEffect(()=>{
+		mixpanel.track('Home page');
+		if(user) mixpanel.identify(user.sub);
+	}, []);
+
 	return x`<div class='Home'>
 		${Nav(user)}
 		<div class='content container'>

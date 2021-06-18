@@ -30,13 +30,17 @@ server.use(require('express-session')({
 /* Routes */
 server.use(oidc.router);
 server.use((req, res, next)=>{
-	if(req.userContext) req.user = req.userContext.userinfo;
+	if(req.userContext){
+		req.user = req.userContext.userinfo;
+		req.user.id = req.user.sub;
+	}
 	next();
 });
 server.get(config.get('okta.logout_path'), (req, res, next)=>{
 	if(req.isAuthenticated()) return next();
 	return res.redirect('/');
 }, oidc.forceLogoutAndRevoke());
+
 
 
 /* Middleware */

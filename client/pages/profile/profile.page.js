@@ -87,6 +87,12 @@ const ProfilePage = comp(function({ user }){
 		window.refreshChirps = getUserChirps
 	}, []);
 
+	this.useEffect(()=>{
+		mixpanel.track('Profile page');
+		if(user) mixpanel.identify(user.sub);
+	}, []);
+
+
 	return x`<div class='Profile page'>
 		${Nav(user)}
 		<div class='content container'>
