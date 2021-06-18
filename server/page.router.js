@@ -23,6 +23,16 @@ Router.get('/profile', (req, res)=>{
 	}));
 });
 
+
+Router.get('/admin', (req, res)=>{
+	if(!req.user) return res.status(401).send('Must be logged in.');
+	if(!req.user.groups.includes('admin')) return res.status(401).send('Must be an admin.');
+	return res.send(Pages.admin({
+		user : req.user
+	}));
+});
+
+
 // Router.get('/admin', auth.adminOnly, (req, res)=>{
 // 	return res.send(AdminPage({
 // 		user : req.user

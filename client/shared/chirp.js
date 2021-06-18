@@ -49,11 +49,23 @@ global.css.chirp = css`
 					font-size: 0.5em;
 				}
 			}
+
+			.deleteBtn{
+				position: absolute;
+				top : 10px;
+				right : 10px;
+				color : ${colors.grey};
+				font-size: 0.6em;
+				cursor : pointer;
+				&:hover{
+					color : ${colors.red};
+				}
+			}
 		}
 	}
 `;
 
-const Chirp = comp(function({ text, user, id, created_at, updated_at }){
+const Chirp = comp(function({ text, user, id, created_at, updated_at }, onDelete){
 	return x`<div class='Chirp'>
 		<div class='content'>
 			${text}
@@ -61,6 +73,8 @@ const Chirp = comp(function({ text, user, id, created_at, updated_at }){
 				<label>${user.name}</label>
 				<small>${formatDistanceToNow(new Date(created_at))} ago</small>
 			</div>
+
+			${!!onDelete && x`<i class='fa fa-times deleteBtn' onclick=${onDelete}></i>`}
 		</div>
 	</div>`
 });

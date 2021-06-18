@@ -9,7 +9,6 @@ const Server = require('../server/server.js');
 
 //Use this to slip in users
 app.use((req, res, next)=>{
-	console.log('oh hello');
 	next();
 });
 

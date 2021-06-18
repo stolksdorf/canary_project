@@ -65,7 +65,7 @@ const ChirpList = comp(function(){
 
 	const chirps = fetchChirps.result;
 	return x`<div class='ChirpList'>
-		${chirps.map(Chirp)}
+		${chirps.map(chirp=>Chirp(chirp))}
 		<button onclick=${()=>loadMore()}>
 			${fetchChirps.pending
 				? x`<i class='fa fa-spinner fa-spin'></i>`
