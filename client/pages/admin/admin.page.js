@@ -62,7 +62,12 @@ const AdminPage = comp(function({ user }){
 
 	this.useEffect(()=>{
 		getAllChirps();
-		window.refreshChirps = getAllChirps
+		window.refreshChirps = getAllChirps;
+	}, []);
+
+	this.useEffect(()=>{
+		mixpanel.track('Admin page');
+		if(user) mixpanel.identify(user.sub);
 	}, []);
 
 	const [search, setSearch] = this.useState('');

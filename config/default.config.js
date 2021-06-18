@@ -3,6 +3,7 @@ module.exports = {
 	host : 'http://localhost:8000',
 	node_env : 'local',
 
+	//Heads-up: The configs in 'client' will be sent client-side
 	client : {
 
 	},
@@ -17,7 +18,7 @@ module.exports = {
 		// port             : 0,
 	},
 
-	//TODO: Populate this with a defualt Okta instances when we have one
+	//TODO: Populate this with a default Okta instances when we have one
 	okta : {
 		session_secret: 'set this to be very random',
 		domain        : '',
