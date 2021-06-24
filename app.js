@@ -8,14 +8,15 @@ try{
 	throw 'ERR: Okta is not configured. Get credientials from Scott.';
 }
 
-const DatabaseConnect = require('./server/db.connect.js');
+
 
 const express = require('express');
 const app = express();
 
 const PORT = config.get('port');
 const run = async ()=>{
-	await DatabaseConnect();
+	await require('./server/chirps/chirps.db.js').connect();
+
 	app.use(await Auth.router());
 	app.use(require('./server/server.js'))
 

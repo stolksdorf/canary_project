@@ -33,7 +33,7 @@
     "express-session": "^1.17.2",
     "pg": "^8.6.0",
     "pico-conf": "^3.0.3",
-    "pico-pg": "^1.1.0"
+    "pico-pg": "^1.2.0"
   },
   "devDependencies": {
     "livereload": "^0.9.3",

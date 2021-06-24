@@ -1,37 +1,36 @@
-const config = require('../../config');
-const ppg = require('pico-pg');
+// const config = require('../../config');
+// const ppg = require('pico-pg');
 
-let Chirps;
+// let Chirps;
 
-const db_config = config.get('db');
+// const db_config = config.get('db');
 
-//TODO" Move all of this to database.connect.js once the fallback on pico-pg is completed
-const dbConnect = async ()=>{
-	if(ppg.isConnected()) return;
+// //TODO" Move all of this to database.connect.js once the fallback on pico-pg is completed
+// const dbConnect = async ()=>{
+// 	if(ppg.isConnected()) return;
 
-	const connectionString = config.get('DATABASE_URL', false);
-	const localConfig = config.get('local_db', false);
+// 	const connectionString = config.get('DATABASE_URL', false);
+// 	const localConfig = config.get('local_db', false);
 
-	if(connectionString){
-		await ppg.connect({ connectionString, ssl: { rejectUnauthorized: false }});
-		console.log(`Database: Connected to ${connectionString}`);
-	}else if(localConfig){
-		await ppg.connect(localConfig);
-		console.log(`Database: Connected to local db on post : ${localConfig.port}`);
-	}else{
-		console.log('Warning: No Database connected');
-	}
-};
+// 	if(connectionString){
+// 		await ppg.connect({ connectionString, ssl: { rejectUnauthorized: false }});
+// 		console.log(`Database: Connected to ${connectionString}`);
+// 	}else if(localConfig){
+// 		await ppg.connect(localConfig);
+// 		console.log(`Database: Connected to local db on post : ${localConfig.port}`);
+// 	}else{
+// 		console.log('Warning: No Database connected');
+// 	}
+// };
 
-
-
+let DB, Chirps;
 const connect = async ()=>{
-	await dbConnect();
-	Chirps = await ppg.table('chirps');
+	DB = await require('../db.connect.js')()
+	Chirps = await DB.table('chirps');
 };
 const disconnect = async ()=>{
-	if(!ppg.isConnected()) return;
-	await ppg.disconnect();
+	if(!DB.isConnected()) return;
+	await DB.disconnect();
 	Chirps = null;
 };
 

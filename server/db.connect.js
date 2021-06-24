@@ -1,22 +1,15 @@
 const config = require('../config');
-const ppg = require('pico-pg');
-
-const ChirpsDB = require('./chirps/chirps.db.js');
-
+let ppg = require('pico-pg');
 
 module.exports = async ()=>{
-	const connectionString = config.get('DATABASE_URL', false);
-	const localConfig = config.get('local_db', false);
+	const db_config = config.get('db', false);
+	if(!db_config){
+		if(config.get('node_env') !== 'local'){ throw 'No Postgres config. Can not start database.'}
 
-	if(connectionString){
-		await ppg.connect({ connectionString, ssl: { rejectUnauthorized: false }});
-		console.log(`Database: Connected to ${connectionString}`);
-	}else if(localConfig){
-		await ppg.connect(localConfig);
-		console.log(`Database: Connected to local db on post : ${localConfig.port}`);
-	}else{
-		console.log('Warning: No Database connected');
+		console.log('DEV: No Postgres config. Falling back to in-memory database.');
+		ppg = require('pico-pg/memory');
 	}
 
-	await ChirpsDB.connect();
+	await ppg.connect(db_config);
+	return ppg;
 };
