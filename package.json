@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch server --watch config app.js --dev",
     "start": "node app.js",
-    "logs": "heroku logs -t --app=canary2",
+    "logs": "heroku logs -t --app=canary-dev",
     "dummy_data": "node scripts/dummy_data.js",
     "test": "pico-check ./tests",
     "test:dev": "pico-check --watch ./tests"

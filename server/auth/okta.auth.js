@@ -1,6 +1,18 @@
-const config = require('../config');
+const config = require('../../config');
 const express = require('express');
 const server = express();
+
+/*TODO:
+- Using the middleware completely is a bit overkill
+- Espicailly when we need to design fallbacks in mind
+- Research other methods of incorporating okta into the auth flow
+
+- Set up a general auth module to include that will utilize either Okta or a fallback if okta creds aren't provided
+- Custom login fallback page to select between pre-built persona accounts for local testing
+-
+
+
+*/
 
 
 const { ExpressOIDC } = require('@okta/oidc-middleware');

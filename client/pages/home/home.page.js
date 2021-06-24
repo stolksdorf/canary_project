@@ -4,8 +4,6 @@ const { request } = require('../../utils.js');
 
 global.headtags.title = '<title>Home - Canary Project</title>';
 
-//global.css.lattice = require('../../lattive/style.js');
-
 global.css.home_page = css`
 	.Home{
 		.content.container{
