@@ -1,15 +1,11 @@
 const config = require('../../config');
 const ppg = require('pico-pg');
-let DB;
+
+let Chirps;
 
 const db_config = config.get('db');
 
-
-
-
-
-//TODO: This needs to be cleaned up
-
+//TODO" Move all of this to database.connect.js once the fallback on pico-pg is completed
 const dbConnect = async ()=>{
 	if(ppg.isConnected()) return;
 
@@ -31,28 +27,28 @@ const dbConnect = async ()=>{
 
 const connect = async ()=>{
 	await dbConnect();
-	DB = await ppg.table('chirps');
+	Chirps = await ppg.table('chirps');
 };
 const disconnect = async ()=>{
 	if(!ppg.isConnected()) return;
 	await ppg.disconnect();
-	DB = null;
+	Chirps = null;
 };
 
 
 
 const create = async (text, user)=>{
-	return await DB.add({
+	return await Chirps.add({
 		text, user
 	});
 };
 
-const all = async ()=>await DB.all()
+const all = async ()=>await Chirps.all()
 
 
 
 const getLatest = async (count = undefined)=>{
-	return await DB.all({
+	return await Chirps.all({
 		limit : count,
 		sort : {
 			created_at : -1
@@ -61,7 +57,7 @@ const getLatest = async (count = undefined)=>{
 };
 
 const getByUser = async (user_id)=>{
-	return await DB.find({
+	return await Chirps.find({
 		user : {
 			sub : user_id
 		}
@@ -73,7 +69,7 @@ const getByUser = async (user_id)=>{
 };
 
 const deleteChirp = async (chirp_id)=>{
-	return DB.removeById(chirp_id);
+	return Chirps.removeById(chirp_id);
 };
 
 module.exports = {
@@ -87,8 +83,3 @@ module.exports = {
 
 	all,
 }
-
-
-// if(!db_config.url && !db_config.port){ //TODO: add on a prod check
-// 	module.exports = require('./chirps.mem.js');
-// }

@@ -2,10 +2,8 @@ const app = require('express')();
 
 const request = require('supertest');
 
-
 const ChirpsDB = require('../server/chirps/chirps.db.js');
 const Server = require('../server/server.js');
-
 
 //Use this to slip in users
 app.use((req, res, next)=>{
@@ -16,7 +14,6 @@ app.use(Server)
 
 
 module.exports = {
-	//TODO: Check for swagger spec
 
 	setup : async (t)=>{
 		await ChirpsDB.connect();

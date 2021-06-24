@@ -13,7 +13,6 @@ module.exports = {
 
 	imports : ()=>{
 		return `
-		<!--<script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>-->
 		<link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 		`
 	},

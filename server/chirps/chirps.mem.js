@@ -1,13 +1,14 @@
+/* In memory fallback if postgres is not configured */
 
 const shortid = ()=>Math.random().toString(32).substr(2);
 let DB = [];
 
-//TODO: This should be replaced
-
 
 module.exports = {
 
-	connect : ()=>{},
+	connect : ()=>{
+		if(process.env.NODE_ENV !== 'local') throw 'In memory database fallback only for local development';
+	},
 	disconnect : ()=>{},
 
 	create : (text, user)=>{
