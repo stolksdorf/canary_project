@@ -5,6 +5,8 @@ const fs = require('fs');
 const pack = require(`${process.cwd()}/libs/pico-pack.js`);
 const { render } = require(`${process.cwd()}/libs/xo.js`);
 
+const config = require('../../config');
+
 let lr;
 if(DEV_MODE){
 	lr = require('livereload').createServer();
@@ -25,7 +27,11 @@ module.exports = {
 	render,
 	bundle: (pathToFile, func)=>{
 		const result = pack(pathToFile, {
-			global : { css : {}, headtags: {} },
+			global : {
+				css      : {},
+				headtags : {},
+				config   : config.get('client', {})
+			},
 			transforms : {
 				'*' : AssetTransform
 			},

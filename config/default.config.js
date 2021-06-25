@@ -5,12 +5,12 @@ module.exports = {
 
 	//Heads-up: The configs in 'client' will be sent client-side
 	client : {
-
+		stripe_donate_link : 'https://buy.stripe.com/eVaeXR3Rxb771k4000'
 	},
 
 	db : false,
 	/*db : {
-		//These should be overriden in your local.config.js file for dev
+		//These should be overriden in your local.config.js file for dev with postgres
 		connectionString : ''
 		user             : '',
 		password         : '',

@@ -47,6 +47,12 @@ const Nav = comp(function(user){
 					<i class="fa fa-home"></i> Home
 				</a>
 
+				${global.config.stripe_donate_link &&
+					x`<a class='navItem' target='_blank' href=${global.config.stripe_donate_link}>
+						<i class="fa fa-heart"></i> Donate
+					</a>`
+				}
+
 				${isAdmin &&
 					x`<a href='/admin' class='navItem'>
 						<i class="fa fa-lock"></i> Admin Panel
