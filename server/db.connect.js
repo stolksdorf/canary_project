@@ -5,7 +5,7 @@ module.exports = async ()=>{
 	const db_config = config.get('db', false);
 	const connectionString = config.get('DATABASE_URL', false);
 
-	if(!db_config || !connectionString){
+	if(!db_config && !connectionString){
 		if(config.get('node_env') !== 'local'){ throw 'No Postgres config. Can not start database.'}
 
 		console.log('DEV: No Postgres config. Falling back to in-memory database.');
