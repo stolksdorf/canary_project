@@ -9,6 +9,7 @@ module.exports = {
 	},
 
 	db : false,
+
 	/*db : {
 		//These should be overriden in your local.config.js file for dev with postgres
 		connectionString : ''
