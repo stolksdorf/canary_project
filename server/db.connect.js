@@ -2,9 +2,11 @@ const config = require('../config');
 let ppg = require('pico-pg');
 
 module.exports = async ()=>{
-	const db_config = config.get('db', false);
+	let db_config = config.get('db', false);
 
 	console.log('db_config', db_config);
+
+	db_config.connectionString = db_config.connectionstring;
 
 	if(!db_config){
 		if(config.get('node_env') !== 'local'){ throw 'No Postgres config. Can not start database.'}
