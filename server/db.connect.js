@@ -13,7 +13,7 @@ module.exports = async ()=>{
 	}
 
 	if(db_config) await ppg.connect(db_config);
-	if(connectionString) await ppg.connect({ connectionString });
+	if(connectionString) await ppg.connect({ connectionString, ssl: { rejectUnauthorized: false } });
 
 	return ppg;
 };
