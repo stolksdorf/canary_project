@@ -18,7 +18,7 @@ router.get('/api/chirps/user/:user_id', async (req, res)=>{
 });
 
 router.get('/api/chirps/latest', async (req, res)=>{
-	await wait(1200);
+//	await wait(1200);
 	return res.json(await ChirpsDB.getLatest(req.query.count));
 });
 
@@ -35,7 +35,7 @@ router.all('/api/chirps/delete/:chirp_id', async (req, res)=>{
 
 
 router.all('/api/chirps/create', async (req, res)=>{
-	await wait(1200);
+	//await wait(1200);
 
 	if(!req.user) return res.status(401).send('Only users can create chirps');
 	if(!req.body.text) return res.status(400).send('Chirp requires text');
